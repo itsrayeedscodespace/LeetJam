@@ -1,0 +1,83 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+/**
+ * Groups an array of strings into lists of anagrams.
+ *
+ * DETAILED DESCRIPTION:
+ * ---------------------
+ * Two strings are anagrams if they contain the same characters with the same
+ * frequencies, regardless of order. For example, "eat", "tea", and "ate"
+ * all contain: 1 'a', 1 'e', and 1 't'. They should therefore be grouped together.
+ *
+ * This solution creates a character-frequency signature for each string and
+ * uses that signature as a key in a HashMap. All strings that share the same
+ * signature are anagrams, and they map to the same HashMap entry.
+ *
+ * HOW THE METHOD WORKS:
+ * 1. Create a HashMap<String, List<String>> called 'groups'.
+ *    - The key represents the anagram signature.
+ *    - The value is a list containing all strings that match this signature.
+ *
+ * 2. For each string 's' in the input:
+ *    - Create an integer array 'countKeyMapper' of size 26.
+ *      Each index represents a lowercase English letter ('a' → index 0, ..., 'z' → index 25).
+ *
+ *    - Loop through each character in 's', and increment the corresponding index
+ *      in 'countKeyMapper'. After this loop, the array fully describes the
+ *      character frequency distribution of the string.
+ *      Example:
+ *          "eat" → [1,0,0,0,1,0,...,1,...,0]
+ *          "tea" → [1,0,0,0,1,0,...,1,...,0]
+ *
+ *    - Convert the count array into a string key using Arrays.toString().
+ *      This produces a unique, consistent representation of the frequency
+ *      distribution. Arrays.toString() must be used — countKeyMapper.toString()
+ *      would NOT work, because that prints memory references instead of contents.
+ *
+ *    - Check whether the map already contains this key.
+ *      If not, create a new empty list for this key.
+ *
+ *    - Add the current string 's' to the list associated with its key.
+ *
+ * 3. After processing all strings, return all the grouped values inside the map
+ *    as a List<List<String>>.
+ *
+ * The output groups all anagrams together, and the order of groups or strings
+ * inside groups does not matter.
+ *
+ * TIME COMPLEXITY: O(N * M)
+ *   - N = number of strings in the input.
+ *   - M = average length of each string.
+ *   - For each string we:
+ *       * Count characters → O(M)
+ *       * Convert count array to string → O(26) = O(1)
+ *       * HashMap operations → O(1) average case
+ *   - Overall: O(N * M)
+ *
+ * SPACE COMPLEXITY: O(N * M)
+ *   - We store every string in the output → O(N * M) total characters.
+ *   - The HashMap also stores at most N keys and lists.
+ *   - Each key is fixed-size (26 integers), so considered O(1) additional per group.
+ *   - Total space dominated by the output itself.
+ */
+public class Problem49Rayeed {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        HashMap<String, List<String>> groups = new HashMap<>();
+        for (String s: strs) {
+            int[] countKeyMapper = new int[26];
+            for (int i = 0; i < s.length(); i++) {
+                countKeyMapper[s.charAt(i) - 'a']++;
+            }
+            String key = Arrays.toString(countKeyMapper);
+
+            if (!groups.containsKey(key)) {
+                groups.put(key, new ArrayList<>());
+            }
+
+            groups.get(key).add(s);
+        }
+        return new ArrayList<>(groups.values());
+    }
+}
