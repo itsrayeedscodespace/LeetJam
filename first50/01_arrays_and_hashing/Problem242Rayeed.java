@@ -18,7 +18,7 @@ import java.util.HashMap;
  * Space Complexity: O(k)
  *   - Two HashMaps storing character frequencies.
  *   - k is the number of unique characters. If limited to lowercase letters,
- *     this is O(1). Otherwise, O(k).
+ *     this is O(1). Otherwise, O(k). Could this be more efficient?
  */
 public class Problem242Rayeed {
     public boolean isAnagram(String s, String t) {
