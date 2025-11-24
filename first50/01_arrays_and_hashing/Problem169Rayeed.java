@@ -23,7 +23,6 @@ import java.util.HashMap;
  * TIME COMPLEXITY: O(n)
  *   - Counting all elements takes O(n)
  *   - Checking for majority also takes O(n)
- *   - Total: O(n)
  *
  * SPACE COMPLEXITY: O(n)
  *   - In the worst case, the HashMap stores a count for every distinct number.
