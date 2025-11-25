@@ -31,7 +31,6 @@ import java.util.List;
  *   - Initializing the list takes O(n).
  *   - Marking presence for each number takes O(n).
  *   - Collecting missing numbers takes O(n).
- *   - Overall: O(n).
  *
  * SPACE COMPLEXITY: O(n)
  *   - The auxiliary list `missingIndices` uses O(n) space.

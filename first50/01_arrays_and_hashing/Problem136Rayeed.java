@@ -11,7 +11,6 @@ import java.util.HashMap;
  * Time Complexity: O(n)
  *   - Counting occurrences takes O(n)
  *   - Finding the single number also takes O(n)
- *   - Total: O(n)
  *
  * Space Complexity: O(n)
  *   - In the worst case, the HashMap stores a count for every distinct number.
